@@ -2,19 +2,12 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-  export ZSH="/home/devon/.oh-my-zsh"
+  export ZSH=/home/bidscc/.oh-my-zsh
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="af-magic"
-
-# Set list of themes to load
-# Setting this variable when ZSH_THEME=random
-# cause zsh load theme from this variable instead of
-# looking in ~/.oh-my-zsh/themes/
-# An empty array have no effect
-# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
+ZSH_THEME="bidscc"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -58,10 +51,7 @@ ZSH_THEME="af-magic"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(
-  git
-  z
-)
+plugins=(git)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -93,27 +83,18 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-#
-#
-source /opt/ros/kinetic/setup.zsh
-export PATH=$PATH:$HOME/dev/ardupilot/Tools/autotest
 
-alias vim="vim --servername VIM"
+## History
+HISTFILE=$HOME/.zhistory       # enable history saving on shell exit
+setopt APPEND_HISTORY          # append rather than overwrite history file.
+HISTSIZE=1200                  # lines of history to maintain memory
+SAVEHIST=1000                  # lines of history to maintain in history file.
+setopt HIST_EXPIRE_DUPS_FIRST  # allow dups, but expire old ones when I hit HISTSIZE
+setopt EXTENDED_HISTORY        # save timestamp and runtime information
 
-alias vimrc="vim ~/.vimrc"
-alias zshrc="vim ~/.zshrc"
-alias i3config="vim ~/.config/i3/config"
-alias gitconfig="vim ~/.gitconfig"
-alias nb="jupyter notebook"
-alias matlab="matlab -nosplash -nodesktop"
+export PATH="/usr/lib/ccache:$PATH"
 
-mem()
-{
-   ps -eo rss,pid,euser,args:100 --sort %mem | grep -v grep | grep -i $@ | awk '{printf $1/1024 "MB"; $1=""; print }'
-}
+source ~/.rosrc
 
-export PATH=$HOME/.local/bin:$PATH
+alias serial-network="sudo pppd /dev/ttyUSB0 115200 lock noauth debug"
 
-if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then exec startx; fi
-
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

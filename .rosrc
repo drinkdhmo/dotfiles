@@ -1,0 +1,33 @@
+#ROS_DISTRO=kinetic
+ROS_DISTRO=melodic
+INTERFACE=wlp2s0
+
+source /opt/ros/${ROS_DISTRO}/setup.zsh
+# source /opt/ros/melodic/setup.zsh
+
+#source /home/bidscc/magicc_ws/devel/setup.zsh
+#source /home/bidscc/kuusi_ws/devel/setup.zsh
+#source /home/bidscc/magicc/mass/mass_ws/devel/setup.zsh
+#source /home/bidscc/magicc/mass/flight_ws/devel/setup.zsh
+#source /home/bidscc/magicc/mocap_car/devel/setup.zsh
+source /home/bidscc/magicc/mass/mass_mocap_ws/devel/setup.zsh
+
+#export ROS_MASTER_URI=http://sh1.local:11311/
+# export ROS_MASTER_URI=http://kuusi.local:11311/
+#export ROS_MASTER_URI=http://192.168.0.109:11311/
+export ROS_MASTER_URI=http://lambda.local:11311/
+#export ROS_MASTER_URI=http://devon-MacBookPro.local:11311/
+#export ROS_MASTER_URI=http://192.168.1.122:11311/
+#export ROS_MASTER_URI=http://192.168.1.119:11311/
+
+# export ROS_IP=192.168.0.219
+#export ROS_IP=`hostname -I`
+#export ROS_IP=`ifconfig ${INTERFACE} | grep "netmask" | awk '{print $2}'`
+export ROS_HOSTNAME=lambda.local
+
+export GAZEBO_MODEL_PATH=$(rospack find mass_sim)/models
+
+alias rosenv="env | grep ROS"
+alias ros_make="(cd `echo $ROS_PACKAGE_PATH | awk -Fsrc: '{print $1}'` && catkin_make)"
+alias rosbag_mass_mocap="rosbag record -o mass_mocap -e \"/car1/(.*)\" -e \"/vrpn_client_node/(.*)\" /odom /planck_cam/camera_info /planck_cam/image_raw/compressed /high_level_command /rc_raw /status /attitude /command /is_flying /rosout /rosout_agg /tf"
+

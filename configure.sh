@@ -5,7 +5,7 @@ NC='\033[0m'
 
 # Install Prerequisite apt packages
 echo -e "${CYAN}Installing prerequsite packages${NC}"
-sudo apt install feh zsh i3 i3lock git fonts-powerline wget compton pavucontrol rofi arandr ranger python3 libglib2.0-0 libgl1 libfontconfig1 libx11-xcb1 libxi6 libxrender1 libdbus-1-3 tox asciidoc silversearcher-ag
+sudo apt install fonts-font-awesome zsh git fonts-powerline wget python3 libglib2.0-0 libgl1 libfontconfig1 libx11-xcb1 libxi6 libxrender1 libdbus-1-3 tox asciidoc silversearcher-ag
 
 # Copying .gitconfig into home directory
 echo -e "${CYAN}Symlinking .gitconfig to home directory${NC}"
@@ -17,10 +17,6 @@ ln -svf `pwd`/.vimrc $HOME/.vimrc
 
 # Install vim plugins
 vim -c PlugInstall -c q -c q
-
-# Copying Ultisnips
-echo -e "${CYAN}Symlinking UltiSnips to .vim directory${NC}"
-ln -svf `pwd`/UltiSnips $HOME/.vim
 
 # Set default shell to zsh
 echo -e "${CYAN}Changing shell to zsh${NC}"
@@ -34,19 +30,3 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/mas
 echo -e "${CYAN}Symlinking .zshrc to home directory${NC}"
 ln -svf `pwd`/.zshrc $HOME/.zshrc
 
-# Copy over wallpaper
-echo -e "${CYAN}Copying Wallpaper to Pictures directory${NC}"
-cp -r Pictures $HOME
-
-# Get font awesome
-echo -e "${CYAN}Installing font awesome${NC}"
-wget https://github.com/FortAwesome/Font-Awesome/releases/download/5.2.0/fontawesome-free-5.2.0-desktop.zip
-unzip fontawesome-free-5.2.0-desktop.zip
-sudo mv fontawesome-free-5.2.0-desktop /usr/local/share/fonts
-
-# Copy over i3 config
-echo -e "${CYAN}Copying i3 Config${NC}"
-i3-config-wizard
-cp .config/i3/config $HOME/.config/i3/config
-mkdir -p $HOME/.config/i3status
-cp .config/i3status/config $HOME/.config/i3status/config
