@@ -30,3 +30,7 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/mas
 echo -e "${CYAN}Symlinking .zshrc to home directory${NC}"
 ln -svf `pwd`/.zshrc $HOME/.zshrc
 
+# Copy over .rosrc
+echo -e "${CYAN}Symlinking .zshrc to home directory${NC}"
+ln -svf `pwd`/.rosrc $HOME/.rosrc
+
